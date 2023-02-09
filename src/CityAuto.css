@@ -1,0 +1,28 @@
+.city-list {
+  position: absolute;
+  list-style-type: none;
+  background-color: #ffffff;
+  border-radius: 5px;
+  margin-top: 2.7rem;
+  font-size: large;
+}
+
+.city-list__item {
+  display: block;
+  padding: 7px 5px 0 5px;
+  margin: 0.2rem 2rem 0.2rem auto;
+  height: 2rem;
+}
+
+.city-list__item:first-child {
+  margin-top: 1rem;
+}
+
+.city-list__item:last-child {
+  margin-bottom: 1rem;
+}
+
+.city-list__item:hover {
+  background-color: #cccccc;
+  cursor: pointer;
+}

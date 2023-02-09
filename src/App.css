@@ -1,0 +1,7 @@
+.app {
+  margin: 1rem 23rem;
+  padding: 10px;
+  background-color: #666666;
+  border-radius: 5px;
+  min-width: min-content;
+}

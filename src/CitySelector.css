@@ -1,0 +1,21 @@
+.city-selector {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 3rem;
+  min-width: min-content;
+}
+
+.city-selector__input {
+  position: relative;
+  border: 3px solid #000000;
+  height: 2rem;
+  width: min-content;
+  border-radius: 5px;
+  font-size: larger;
+  font-weight: bold;
+}
+
+h2 {
+  text-align: center;
+  color: #ffffff;
+}

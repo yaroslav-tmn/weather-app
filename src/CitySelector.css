@@ -1,7 +1,7 @@
 .city-selector {
   display: flex;
   justify-content: space-between;
-  margin: 0 4rem;
+  margin: 0 3rem;
   min-width: min-content;
 }
 

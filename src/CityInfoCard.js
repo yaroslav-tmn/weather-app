@@ -4,9 +4,13 @@ import WeatherCodes from "./WeatherCodes";
 const CityInfoCard = (props) => {
   return (
     <div className="info-card">
-      <h3>Город: {props.citydata.cityName}</h3>
-      <h3>Температура: {props.citydata.cityTemp}</h3>
-      <h3>Погода: {WeatherCodes[props.citydata.cityWeatherCode]}</h3>
+      <span style={{ color: "#000000" }}>Город:</span> {props.citydata.cityName}
+      <br />
+      <span style={{ color: "#000000" }}>Температура:</span>{" "}
+      {Math.round(props.citydata.cityTemp)} °C
+      <br />
+      <span style={{ color: "#000000" }}>Погода:</span>{" "}
+      {WeatherCodes[props.citydata.cityWeatherCode]}
     </div>
   );
 };

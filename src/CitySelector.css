@@ -1,18 +1,17 @@
 .city-selector {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   margin: 0 3rem;
   min-width: min-content;
 }
 
 .city-selector__input {
   position: relative;
-  border: 3px solid #000000;
+  border: 1px solid #000000;
   height: 2rem;
-  width: min-content;
   border-radius: 5px;
-  font-size: larger;
-  font-weight: bold;
+  font-size: medium;
+  padding: 0 10px;
 }
 
 h2 {

@@ -6,8 +6,10 @@ const CityInfoCard = (props) => {
     <div className="info-card">
       <span style={{ color: "#000000" }}>Город:</span> {props.citydata.cityName}
       <br />
-      <span style={{ color: "#000000" }}>Температура:</span>{" "}
-      {Math.round(props.citydata.cityTemp)} °C
+      <span style={{ color: "#000000" }}>Температура:</span>
+      {props.citydata.cityTemp
+        ? ` ${Math.round(props.citydata.cityTemp)} °C`
+        : ""}
       <br />
       <span style={{ color: "#000000" }}>Погода:</span>{" "}
       {WeatherCodes[props.citydata.cityWeatherCode]}

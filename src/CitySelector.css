@@ -7,11 +7,12 @@
 
 .city-selector__input {
   position: relative;
-  border: 1px solid #000000;
+  border: none;
   height: 2rem;
   border-radius: 5px;
   font-size: medium;
   padding: 0 10px;
+  margin-top: 1rem;
 }
 
 h2 {

@@ -13,6 +13,8 @@ const CityAuto = (props) => {
     cityDataForRender.cityTemp = cityWeatherData.current_weather.temperature;
     cityDataForRender.cityWeatherCode =
       cityWeatherData.current_weather.weathercode;
+    cityDataForRender.cityLon = cityWeatherData.longitude;
+    cityDataForRender.cityLat = cityWeatherData.latitude;
     props.onSelectCity(cityDataForRender);
   };
 

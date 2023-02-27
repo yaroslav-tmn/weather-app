@@ -1,6 +1,7 @@
 .info-card {
+  border: 1px solid red;
   color: white;
-  height: 17rem;
+  height: 10rem;
   width: 20rem;
   margin-top: 1rem;
   padding: 10px;

@@ -7,6 +7,7 @@ function CitySelector() {
   const [query, setQuery] = useState("");
   const [cities, setCities] = useState([]);
   const [cityData, setCityData] = useState({});
+  const [placesIds, setPlacesIds] = useState([]);
 
   const getCityData = async function (typingCity) {
     const response = await fetch(
@@ -33,7 +34,21 @@ function CitySelector() {
       `http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=1000&lon=${citydata.cityLon}&lat=${citydata.cityLat}&apikey=5ae2e3f221c38a28845f05b67f614f533f4239a3fc9b5c8e16e194c9`
     );
     const result = await response.json();
-    console.log(result);
+    const places = [];
+    if (result.features.length < 6) {
+      places.push(...result.features);
+    } else {
+      const arreyOfIndexes = [];
+      while (arreyOfIndexes.length < 5) {
+        let index = Math.floor(Math.random() * result.features.length);
+        if (!arreyOfIndexes.includes(index)) {
+          arreyOfIndexes.push(index);
+        }
+      }
+      arreyOfIndexes.forEach((i) => places.push(result.features[i]));
+    }
+    const xids = places.map((e) => e.properties.xid);
+    setPlacesIds(xids);
   };
 
   const getSelectedCity = (selCityData) => {
@@ -54,7 +69,7 @@ function CitySelector() {
           setQuery(event.target.value);
         }}
       ></input>
-      <CityInfoCard citydata={cityData} />
+      <CityInfoCard citydata={cityData} places={placesIds} />
       <CityAuto cities={cities} onSelectCity={getSelectedCity} />
     </div>
   );

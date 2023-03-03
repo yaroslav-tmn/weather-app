@@ -34,21 +34,19 @@ function CitySelector() {
       `http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=1000&lon=${citydata.cityLon}&lat=${citydata.cityLat}&apikey=5ae2e3f221c38a28845f05b67f614f533f4239a3fc9b5c8e16e194c9`
     );
     const result = await response.json();
-    const places = [];
-    if (result.features.length < 6) {
-      places.push(...result.features);
+    const ids = [];
+    if (result.features.length < 10) {
+      result.features.map((e) => ids.push(e.properties.xid));
     } else {
-      const arreyOfIndexes = [];
-      while (arreyOfIndexes.length < 5) {
-        let index = Math.floor(Math.random() * result.features.length);
-        if (!arreyOfIndexes.includes(index)) {
-          arreyOfIndexes.push(index);
+      while (ids.length < 9) {
+        const randomIndex = Math.floor(Math.random() * result.features.length);
+        const potencialObjectXid = result.features[randomIndex].properties.xid;
+        if (!ids.includes(potencialObjectXid)) {
+          ids.push(potencialObjectXid);
         }
       }
-      arreyOfIndexes.forEach((i) => places.push(result.features[i]));
     }
-    const xids = places.map((e) => e.properties.xid);
-    setPlacesIds(xids);
+    setPlacesIds(ids);
   };
 
   const getSelectedCity = (selCityData) => {

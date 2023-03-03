@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "./CityInfoCard.css";
 import WeatherCodes from "./WeatherCodes";
 
 const CityInfoCard = (props) => {
+  const placeImageRef = useRef();
+
   const getImagesUrls = async (ids) => {
     const responses = await Promise.all(
       ids.map((id) =>
@@ -11,7 +13,14 @@ const CityInfoCard = (props) => {
         ).then((response) => response.json())
       )
     );
-    console.log(responses);
+    const placesWithImages = responses.filter((obj) =>
+      obj.hasOwnProperty("preview")
+    );
+    if (placesWithImages.length > 0) {
+      placeImageRef.current.src = placesWithImages[0].preview.source;
+    } else {
+      placeImageRef.current.src = "abstract_city.jpg";
+    }
   };
 
   useEffect(() => {
@@ -29,6 +38,8 @@ const CityInfoCard = (props) => {
       <br />
       <span style={{ color: "#000000" }}>Погода:</span>{" "}
       {WeatherCodes[props.citydata.cityWeatherCode]}
+      <br />
+      <img src="abstract_city.jpg" alt="Place" ref={placeImageRef} />
     </div>
   );
 };

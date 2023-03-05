@@ -16,8 +16,19 @@ const CityInfoCard = (props) => {
     const placesWithImages = responses.filter((obj) =>
       obj.hasOwnProperty("preview")
     );
+
     if (placesWithImages.length > 0) {
-      placeImageRef.current.src = placesWithImages[0].preview.source;
+      let currentImage = 0;
+      const goSlideShow = () => {
+        placeImageRef.current.src =
+          placesWithImages[currentImage].preview.source;
+        placeImageRef.current.width = 320;
+        currentImage++;
+        if (currentImage > placesWithImages.length) {
+          currentImage = 0;
+        }
+      };
+      setInterval(goSlideShow, 5000);
     } else {
       placeImageRef.current.src = "abstract_city.jpg";
     }
@@ -38,6 +49,7 @@ const CityInfoCard = (props) => {
       <br />
       <span style={{ color: "#000000" }}>Погода:</span>{" "}
       {WeatherCodes[props.citydata.cityWeatherCode]}
+      <br />
       <br />
       <img src="abstract_city.jpg" alt="Place" ref={placeImageRef} />
     </div>

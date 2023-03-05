@@ -31,7 +31,7 @@ function CitySelector() {
 
   const getCityInfo = async function (citydata) {
     const response = await fetch(
-      `http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=1000&lon=${citydata.cityLon}&lat=${citydata.cityLat}&apikey=5ae2e3f221c38a28845f05b67f614f533f4239a3fc9b5c8e16e194c9`
+      `http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=5000&lon=${citydata.cityLon}&lat=${citydata.cityLat}&apikey=5ae2e3f221c38a28845f05b67f614f533f4239a3fc9b5c8e16e194c9`
     );
     const result = await response.json();
     const ids = [];

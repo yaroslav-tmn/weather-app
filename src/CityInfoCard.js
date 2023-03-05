@@ -22,7 +22,6 @@ const CityInfoCard = (props) => {
       const goSlideShow = () => {
         placeImageRef.current.src =
           placesWithImages[currentImage].preview.source;
-        placeImageRef.current.width = 320;
         currentImage++;
         if (currentImage > placesWithImages.length) {
           currentImage = 0;

@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./CityInfoCard.css";
 import WeatherCodes from "./WeatherCodes";
 
 const CityInfoCard = (props) => {
   const placeImageRef = useRef();
+  const [placesWithImages, setPlacesWithImages] = useState();
 
   const getImagesUrls = async (ids) => {
     const responses = await Promise.all(
@@ -13,9 +14,10 @@ const CityInfoCard = (props) => {
         ).then((response) => response.json())
       )
     );
-    const placesWithImages = responses.filter((obj) =>
-      obj.hasOwnProperty("preview")
+    setPlacesWithImages(
+      responses.filter((obj) => obj.hasOwnProperty("preview"))
     );
+    console.log(placesWithImages);
 
     if (placesWithImages.length > 0) {
       let currentImage = 0;

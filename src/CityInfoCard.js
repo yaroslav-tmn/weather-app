@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import "./CityInfoCard.css";
 import WeatherCodes from "./WeatherCodes";
+import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
 
 const CityInfoCard = (props) => {
-  const placeImageRef = useRef();
-
+  const placesWithImages = [];
   const getImagesUrls = async (ids) => {
     const responses = await Promise.all(
       ids.map((id) =>
@@ -13,24 +14,9 @@ const CityInfoCard = (props) => {
         ).then((response) => response.json())
       )
     );
-    const placesWithImages = responses.filter((obj) =>
-      obj.hasOwnProperty("preview")
+    placesWithImages.push(
+      ...responses.filter((obj) => obj.hasOwnProperty("preview"))
     );
-
-    if (placesWithImages.length > 0) {
-      let currentImage = 0;
-      const goSlideShow = () => {
-        placeImageRef.current.src =
-          placesWithImages[currentImage].preview.source;
-        currentImage++;
-        if (currentImage > placesWithImages.length) {
-          currentImage = 0;
-        }
-      };
-      setInterval(goSlideShow, 5000);
-    } else {
-      placeImageRef.current.src = "abstract_city.jpg";
-    }
   };
 
   useEffect(() => {
@@ -49,8 +35,19 @@ const CityInfoCard = (props) => {
       <span style={{ color: "#000000" }}>Погода:</span>{" "}
       {WeatherCodes[props.citydata.cityWeatherCode]}
       <br />
-      <br />
-      <img src="abstract_city.jpg" alt="Place" ref={placeImageRef} />
+      <Slide>
+        {placesWithImages.map((place) => (
+          <div className="each-slide-effect">
+            <div
+              style={{
+                backgroundImage: `url(${placesWithImages[place].preview.source})`,
+              }}
+            >
+              <span>Slide {`${place + 1}`}</span>
+            </div>
+          </div>
+        ))}
+      </Slide>
     </div>
   );
 };

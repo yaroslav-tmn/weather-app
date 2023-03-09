@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./CityAuto.css";
 
 const CityAuto = (props) => {
@@ -18,11 +19,26 @@ const CityAuto = (props) => {
     props.onSelectCity(cityDataForRender);
   };
 
+  useEffect(() => {
+    const selectionHandler = (event) => {
+      if (event.key === "ArrowDown") {
+        console.log("ВНИЗ");
+      }
+      if (event.key === "ArrowUp") {
+        console.log("ВВЕРХ");
+      }
+    };
+    document.addEventListener("keydown", selectionHandler);
+    return () => {
+      document.removeEventListener("keydown", selectionHandler);
+    };
+  }, []);
+
   return (
     <ul className="city-list">
       {props.cities.map((item) => (
         <li
-          className="city-list__item "
+          className="city-list__item"
           key={item.id}
           onClickCapture={() => {
             getCityWeather(item);

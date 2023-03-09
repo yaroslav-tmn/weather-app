@@ -1,14 +1,17 @@
 import "./CityAuto.css";
-import { useKeyboardsNavigation } from "./hooks";
+import { useKeyboardsNavigation } from "./hooks/useKeyboardNavigation";
 
 const CityAuto = (props) => {
   const { cities, onSelectCity } = props;
 
-  const { activeIndex, getCityWeather } = useKeyboardsNavigation(cities, onSelectCity);
+  const { activeIndex, getCityWeather } = useKeyboardsNavigation(
+    cities,
+    onSelectCity
+  );
 
   return (
     <ul className="city-list">
-      {props.cities.map((item, index) => (
+      {cities.map((item, index) => (
         <li
           className={`city-list__item ${index === activeIndex ? "active" : ""}`}
           id={`city-${index}`}

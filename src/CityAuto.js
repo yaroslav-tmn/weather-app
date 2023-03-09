@@ -1,44 +1,17 @@
-import { useEffect } from "react";
 import "./CityAuto.css";
+import { useKeyboardsNavigation } from "./hooks";
 
 const CityAuto = (props) => {
-  const getCityWeather = async function (item) {
-    const cityLatitude = item.latitude;
-    const cityLongitude = item.longitude;
-    const response = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${cityLatitude}&longitude=${cityLongitude}&current_weather=true&timezone=auto`
-    );
-    const cityWeatherData = await response.json();
-    const cityDataForRender = {};
-    cityDataForRender.cityName = item.name;
-    cityDataForRender.cityTemp = cityWeatherData.current_weather.temperature;
-    cityDataForRender.cityWeatherCode =
-      cityWeatherData.current_weather.weathercode;
-    cityDataForRender.cityLon = cityWeatherData.longitude;
-    cityDataForRender.cityLat = cityWeatherData.latitude;
-    props.onSelectCity(cityDataForRender);
-  };
+  const { cities, onSelectCity } = props;
 
-  useEffect(() => {
-    const selectionHandler = (event) => {
-      if (event.key === "ArrowDown") {
-        console.log("ВНИЗ");
-      }
-      if (event.key === "ArrowUp") {
-        console.log("ВВЕРХ");
-      }
-    };
-    document.addEventListener("keydown", selectionHandler);
-    return () => {
-      document.removeEventListener("keydown", selectionHandler);
-    };
-  }, []);
+  const { activeIndex, getCityWeather } = useKeyboardsNavigation(cities, onSelectCity);
 
   return (
     <ul className="city-list">
-      {props.cities.map((item) => (
+      {props.cities.map((item, index) => (
         <li
-          className="city-list__item"
+          className={`city-list__item ${index === activeIndex ? "active" : ""}`}
+          id={`city-${index}`}
           key={item.id}
           onClickCapture={() => {
             getCityWeather(item);

@@ -1,7 +1,7 @@
 import "./CitySelector.css";
 import CityAuto from "./CityAuto";
 import CityInfoCard from "./CityInfoCard";
-import { useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 
 function CitySelector() {
   const [query, setQuery] = useState("");
@@ -49,12 +49,12 @@ function CitySelector() {
     setPlacesIds(ids);
   };
 
-  const getSelectedCity = (selCityData) => {
+  const getSelectedCity = useCallback((selCityData) => {
     setCities([]);
     setQuery("");
     setCityData(selCityData);
     getCityInfo(selCityData);
-  };
+  }, []);
 
   return (
     <div className="city-selector">
